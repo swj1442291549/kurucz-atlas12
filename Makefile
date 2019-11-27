@@ -16,7 +16,10 @@ all: $(BINDIR)/xnfpelsyn \
 	 $(BINDIR)/rotate \
 	 $(BINDIR)/broaden \
 	 $(BINDIR)/converfsynnmtoa \
-	 $(BINDIR)/fluxaverage1a_nmtoa
+	 $(BINDIR)/fluxaverage1a_nmtoa \
+	 $(BINDIR)/atlas12 \
+	 $(BINDIR)/diatomicspack \
+	 $(BINDIR)/nltelinesasctobin
 	 
 clean:
 	rm -r $(BINDIR)/*
@@ -71,3 +74,12 @@ $(BINDIR)/converfsynnmtoa:
 
 $(BINDIR)/fluxaverage1a_nmtoa:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/fluxaverage1a_nmtoa.for
+
+$(BINDIR)/atlas12:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas12.for
+    
+$(BINDIR)/diatomicspack:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/diatomicspack.for
+    
+$(BINDIR)/nltelinesasctobin:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/nltelinesasctobin.for
