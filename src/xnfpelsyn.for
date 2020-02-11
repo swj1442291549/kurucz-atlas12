@@ -1,3 +1,4 @@
+
       PROGRAM XNFPELSYN
 c     revised 13jul2015 to allow more molecules, parameter mm
 c     revised 27may2015  BeO and BO replaced by NaH and KH
@@ -30,9 +31,7 @@ C     PRODUCES XNFPEL AND DOPPLE FOR SYNTHE
      1             GRDADB(kw),HSCALE(kw),FLXCNV(kw),VCONV(kw),MIXLTH,
      2             IFCONV
       REAL*8 MIXLTH
-      COMMON /ELEM/ABUND(99),ATMASS(99),ELEM(99)
-      COMMON /XABUND/XABUND(99),WTMOLE
-      character*2 elem
+      COMMON /ELEM/ABUND(99),ATMASS(99),ELEM(99),XABUND(99),WTMOLE
       COMMON /FLUX/FLUX,FLXERR(kw),FLXDRV(kw),FLXRAD(kw)
       COMMON /FREQ/FREQ,FREQLG,EHVKT(kw),STIM(kw),BNU(kw),WAVENO
       COMMON /FRESET/FRESET(500),RCOSET(500),NULO,NUHI,NUMNU,IFWAVE,
@@ -40,9 +39,7 @@ C     PRODUCES XNFPEL AND DOPPLE FOR SYNTHE
       COMMON /HEIGHT/HEIGHT(kw)
       COMMON /IF/IFCORR,IFPRES,IFSURF,IFSCAT,IFMOL,NLTEON,IFOP(20)
       COMMON /ITER/ITER,IFPRNT(15),IFPNCH(15),NUMITS
-      COMMON /JUNK/XSCALE,TITLE(74),FREQID(6),WLTE
-      CHARACTER*1 title,FREQID
-      CHARACTER*4 wlte
+      COMMON /JUNK/TITLE(74),FREQID(6),WLTE,XSCALE
       COMMON /MUS/ANGLE(20),SURFI(20),NMU
       COMMON /OPS/ACOOL(kw),ALUKE(kw),AHOT(kw),SIGEL(kw),ALINES(kw),
      1            SIGLIN(kw),AXLINE(kw),SIGXL(kw),AXCONT(kw),SIGX(kw),
@@ -69,12 +66,11 @@ C     DIMENSION XNFH(kw),XNFHE(kw),XNFH2(kw),IFOUT(kw)
       DIMENSION WLEDGE(377),CMEDGE(377),FRQEDG(377)
       DIMENSION A(377),CONTINALL(1131,kw),FREQSET(1131),CONTABS(1131,kw)
       DIMENSION CONTSCAT(1131,KW)
-      COMMON /FREE/NUMCOL,LETCOL,LAST,MORE,IFFAIL,MAXPOW,WORD(6)
+      COMMON /FREE/WORD(6),NUMCOL,LETCOL,LAST,MORE,IFFAIL,MAXPOW
       COMMON /XNMOL/CODEMOL(MAXMOL),XNMOL(kw,MAXMOL),
      1              XNFPMOL(kw,MAXMOL),NUMMOL
       DIMENSION CARD(81)
-      character*1 card,word
-      DATA CARD/81*' '/
+      DATA CARD/81*1H /
 C     CHANGE PO TO H3+
 C     MOLECULE INDICES
 C         H2     CH     NH     OH     C2     CN     CO     N2     NO
@@ -133,8 +129,8 @@ C    5 107.01,108.01,112.01,113.01,114.01,120.01,  408.,  508.,10101.01,
      2    32.,   25.,   28.,   29.,   40.,   43.,   44.,   33.,   41.,
      3    48.,   56.,   61.,   64.,   67.,    8.,   10.,   12.,   20.,
      4    32.,   36.,   46.,   49.,   52.,   53.,   56.,   57.,   13.,
-c    5    15.,   17.,   25.,   28.,   29.,   41.,   25.,   27.,   47.,
-c    5    15.,   17.,   25.,   28.,   29.,   41.,   25.,   27.,    3.,
+C    5    15.,   17.,   25.,   28.,   29.,   41.,   25.,   27.,   47.,
+C    5    15.,   17.,   25.,   28.,   29.,   41.,   25.,   27.,    3.,
      5    15.,   17.,   25.,   28.,   29.,   41.,   24.,   40.,    3.,
      6    51.,   68.,   71.,   72.,   18.,   44.,   14.,   36.,   60.,
      7    59.,   64.,   75.,   74.,   79.,   28.,   25.,   27.,   47.,
@@ -143,7 +139,7 @@ c    5    15.,   17.,   25.,   28.,   29.,   41.,   25.,   27.,    3.,
      A    17.,   26.,   16.,   32.,   40.,   52.,   38.,   52.,   50.,
      B   104.,  107.,  155.,  999.,  999.,  999.,  999.,  999.,  999.,
      C   999./
-c      OPEN(UNIT=17,TYPE='OLD',READONLY,SHARED)
+      OPEN(UNIT=17,TYPE='OLD',READONLY,SHARED)
    10 CALL READIN(20)
       IFOP(14)=0
       IFOP(15)=0
@@ -232,8 +228,8 @@ C     WAVENUMBERS MUST BE MULTIPLIED BY 1.E25
       CALL POPS(20.01D0,11,XNFPCA)
       CALL POPS(26.00D0,11,XNFPFE)
 C     26jul2004  correction from Fiorella Castelli
-c      IF(IFMOL.EQ.1)CALL POPS(106.00D0,11,XNFPCH)
-c      IF(IFMOL.EQ.1)CALL POPS(108.00D0,11,XNFPOH)
+C      IF(IFMOL.EQ.1)CALL POPS(106.00D0,11,XNFPCH)
+C      IF(IFMOL.EQ.1)CALL POPS(108.00D0,11,XNFPOH)
       IF(IFMOL.EQ.1)CALL POPS(106.00D0,1,XNFPCH)
       IF(IFMOL.EQ.1)CALL POPS(108.00D0,1,XNFPOH)
       DO 444 J=1,NRHOX
@@ -328,7 +324,6 @@ C
       XNFP(J,6,40)=XNFPH2(J)
  2828 XNFP(J,6,46)=XNFPCO(J)
       IF(IFMOL.EQ.0)GO TO 210
-      IF(IFMOL.EQ.0)GO TO 210
       DO 201 NELEM=40,mw
   201 CALL POPS(IDMOL(NELEM-39),1,XNFP(1,6,NELEM))
   210 DO 250 J=1,NRHOX
@@ -354,8 +349,8 @@ C
       DOPPLE(5,40+NELEM)=DOPPLE(1,NELEM)
       DOPPLE(5,50+NELEM)=DOPPLE(1,NELEM)
    21 DOPPLE(5,60+NELEM)=DOPPLE(1,NELEM)
-C      IF(IFMOL.EQ.0)GO TO 270
-      DO 265 NELEM=40,99
+C     IF(IFMOL.EQ.0)GO TO 270
+      DO 265 NELEM=40,mw
   265 DOPPLE(6,NELEM)=SQRT(2.*TK(J)/MOMASS(NELEM-39)/1.660D-24+
      1VTURB(J)**2)/2.99792458D10
   270 CONTINUE
@@ -385,22 +380,19 @@ C
   300 CONTINUE
       CALL EXIT
       END
+      SUBROUTINE ATLAS7
+      END
       FUNCTION XFREEF(CARD)
       IMPLICIT REAL*8 (A-H,O-Z)
-      COMMON /FREE/NUMCOL,LETCOL,LAST,MORE,IFFAIL,MAXPOW,WORD(6)
+      COMMON /FREE/WORD(6),NUMCOL,LETCOL,LAST,MORE,IFFAIL,MAXPOW
       DIMENSION CARD(81)
-      character*1 card,word
       MORE=1
       XFREEF=FREEFF(CARD)
-c      write(6,66)xfreef,numcol,last
- 66   format (1x,1pE12.4,2i10)
       IF(IFFAIL.EQ.0)RETURN
       L=LAST-1
       READ(17,1)(CARD(I),I=1,L)
     1 FORMAT(80A1)
       NUMCOL=1
       XFREEF=FREEFF(CARD)
-c      write(6,666)xfreef
- 666  format(10x,1pE10.3)
       RETURN
       END
