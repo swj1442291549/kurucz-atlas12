@@ -18,6 +18,10 @@ all: $(BINDIR)/xnfpelsyn \
 	 $(BINDIR)/converfsynnmtoa \
 	 $(BINDIR)/fluxaverage1a_nmtoa \
 	 $(BINDIR)/atlas12 \
+	 $(BINDIR)/atlas9mem \
+	 $(BINDIR)/atlas9v \
+	 $(BINDIR)/kappa9 \
+	 $(BINDIR)/kapreadts \
 	 $(BINDIR)/diatomicspack \
 	 $(BINDIR)/nltelinesasctobin
 	 
@@ -77,6 +81,18 @@ $(BINDIR)/fluxaverage1a_nmtoa:
 
 $(BINDIR)/atlas12:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas12.for
+
+$(BINDIR)/atlas9mem:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas9mem.for
+
+$(BINDIR)/atlas9v:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas9v.for
+
+$(BINDIR)/kappa9:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/kappa9.for
+
+$(BINDIR)/kapreadts:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/kapreadts.for
     
 $(BINDIR)/diatomicspack:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/diatomicspack.for
