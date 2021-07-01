@@ -24,7 +24,7 @@ all: $(BINDIR)/xnfpelsyn \
 	$(BINDIR)/diatomicspack \
 	$(BINDIR)/nltelinesasctobin \
 	$(BINDIR)/kappa9 \
-	$(BINDIR)/kapreadts \
+	$(BINDIR)/kapreadts
 	 
 clean:
 	rm -r $(BINDIR)/*
