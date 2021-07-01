@@ -25,8 +25,8 @@ atlas_init     = './initial_models/*.*'                         # ATLAS-9 initia
 atlas_exe      = './bin/atlas9mem'                     # ATLAS-9 compiled executable
 synthe_suite   = './bin'                                   # SYNTHE compiled executables
 dfsynthe_suite = './bin'                                   # DFSYNTHE compiled executables
-default_vega   = '../std_spectra/vega_bohlin_2004.dat'           # Default Vega spectrum to use for bolometric corrections
-trans_dir      = '../filters/*.*'                                # Directory for filter transmission profiles for bolometry
+default_vega   = './std_spectra/vega_bohlin_2004.dat'           # Default Vega spectrum to use for bolometric corrections
+trans_dir      = './filters/*.*'                                # Directory for filter transmission profiles for bolometry
 
 
 python_path = os.path.dirname(os.path.realpath(__file__))
