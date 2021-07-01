@@ -26,6 +26,10 @@ all: $(BINDIR)/xnfpelsyn \
 	$(BINDIR)/nltelinesasctobin \
 	$(BINDIR)/kappa9 \
 	$(BINDIR)/kapreadts \
+	$(BINDIR)/xnfdf \
+	$(BINDIR)/dfsynthe \
+	$(BINDIR)/dfsortp \
+	$(BINDIR)/separatedf \
 	 
 clean:
 	rm -r $(BINDIR)/*
@@ -101,3 +105,15 @@ $(BINDIR)/kappa9:
 
 $(BINDIR)/kapreadts:
 	$(FC1) $(FC1FLAGS) -o $@ $(SRCDIR)/kapreadts.for
+
+$(BINDIR)/xnfdf:
+	$(FC1) -o $@ $(SRCDIR)/xnfdf.for
+
+$(BINDIR)/dfsynthe:
+	$(FC1) -o $@ $(SRCDIR)/dfsynthe.for
+
+$(BINDIR)/dfsortp:
+	$(FC1) -o $@ $(SRCDIR)/dfsortp.for
+
+$(BINDIR)/separatedf:
+	$(FC1) -o $@ $(SRCDIR)/separatedf.for
