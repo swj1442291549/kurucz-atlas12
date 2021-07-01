@@ -1,25 +1,30 @@
 FC = gfortran
 FCFLAGS = -fno-automatic -w -O3
+FC1 = ifort
 BINDIR = bin
 SRCDIR = src
 
 all: $(BINDIR)/xnfpelsyn \
-	 $(BINDIR)/synbeg \
-	 $(BINDIR)/rgfalllinesnew \
-	 $(BINDIR)/rpredict \
-	 $(BINDIR)/rmolecasc \
-	 $(BINDIR)/eschwbin \
-	 $(BINDIR)/rschwenk \
-	 $(BINDIR)/rh2ofast \
-     $(BINDIR)/synthe \
-	 $(BINDIR)/spectrv \
-	 $(BINDIR)/rotate \
-	 $(BINDIR)/broaden \
-	 $(BINDIR)/converfsynnmtoa \
-	 $(BINDIR)/fluxaverage1a_nmtoa \
-	 $(BINDIR)/atlas12 \
-	 $(BINDIR)/diatomicspack \
-	 $(BINDIR)/nltelinesasctobin
+	$(BINDIR)/synbeg \
+	$(BINDIR)/rgfalllinesnew \
+	$(BINDIR)/rpredict \
+	$(BINDIR)/rmolecasc \
+	$(BINDIR)/eschwbin \
+	$(BINDIR)/rschwenk \
+	$(BINDIR)/rh2ofast \
+	$(BINDIR)/synthe \
+	$(BINDIR)/spectrv \
+	$(BINDIR)/rotate \
+	$(BINDIR)/broaden \
+	$(BINDIR)/converfsynnmtoa \
+	$(BINDIR)/fluxaverage1a_nmtoa \
+	$(BINDIR)/atlas12 \
+	$(BINDIR)/atlas9mem \
+	$(BINDIR)/atlas9v \
+	$(BINDIR)/diatomicspack \
+	$(BINDIR)/nltelinesasctobin \
+	$(BINDIR)/kappa9 \
+	$(BINDIR)/kapreadts \
 	 
 clean:
 	rm -r $(BINDIR)/*
@@ -77,9 +82,21 @@ $(BINDIR)/fluxaverage1a_nmtoa:
 
 $(BINDIR)/atlas12:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas12.for
-    
+
+$(BINDIR)/atlas9mem:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas9mem.for
+
+$(BINDIR)/atlas9v:
+	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/atlas9v.for
+
 $(BINDIR)/diatomicspack:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/diatomicspack.for
     
 $(BINDIR)/nltelinesasctobin:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/nltelinesasctobin.for
+
+$(BINDIR)/kappa9:
+	$(FC1) -o $@ $(SRCDIR)/kappa9.for
+
+$(BINDIR)/kapreadts:
+	$(FC1) -o $@ $(SRCDIR)/kapreadts.for
