@@ -58,6 +58,18 @@ if __name__ == "__main__":
         ["sioax.asc", "http://kurucz.harvard.edu/linelists/linesmol/sioax.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
         ["sioex.asc", "http://kurucz.harvard.edu/linelists/linesmol/sioex.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
         ["chmasseron.asc", "http://kurucz.harvard.edu/molecules/ch/chmasseron.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["sihax.asc", "http://kurucz.harvard.edu/molecules/sih/sihax.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["vo.readme", "http://kurucz.harvard.edu/molecules/vo/vo.readme", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["vo.asc", "http://kurucz.harvard.edu/molecules/vo/vo.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["vomyt.asc", "http://kurucz.harvard.edu/molecules/vo/vomyt.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["tioschwenke.bin", "http://kurucz.harvard.edu/molecules/tio/tioschwenke.bin", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["ohupdate.asc", "http://kurucz.harvard.edu/molecules/oh/ohupdate.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["h2ofastfix.bin", "http://kurucz.harvard.edu/molecules/h2o/h2ofastfix.bin", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["cnxx12brooke.asc", "http://kurucz.harvard.edu/molecules/cn/cnxx12brooke.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["cnbxbrookek.asc", "http://kurucz.harvard.edu/molecules/cn/cnbxbrookek.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["mgh.asc", "http://kurucz.harvard.edu/molecules/mgh/mgh.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["c2dabrookek.asc", "http://kurucz.harvard.edu/molecules/c2/c2dabrookek.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
+        ["cnaxbrookek.asc", "http://kurucz.harvard.edu/molecules/cn/cnaxbrookek.asc", "./data/atmos_files_jon/Molecules_SYNTHE"],
     ]
 
     for item in download_file_list:
