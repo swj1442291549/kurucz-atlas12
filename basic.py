@@ -297,7 +297,7 @@ def dfsynthe(run):
 	
 	# Run XNFDF
 	os.chdir(path)
-	os.system('source ./xnfdf.com')
+	os.system('sh ./xnfdf.com')
 	os.chdir(python_path)
 	if (not (os.path.isfile(path + '/xnfpdf.dat'))) or (not (os.path.isfile(path + '/xnfpdfmax.dat'))):
 	 	print("XNFDF did not output expected files")
@@ -313,7 +313,7 @@ def dfsynthe(run):
 	file.close()
 	print("Will run DFSYNTHE to tabulate the ODFs (opacity density functions)")
 	os.chdir(path)
-	os.system('source ./dfp00_start.com')
+	os.system('sh ./dfp00_start.com')
 	os.chdir(python_path)
 	for i, dft in enumerate(dfts):
 		cards['dft'] = str(int(float(dft)))
@@ -322,11 +322,11 @@ def dfsynthe(run):
 		file.write(templates.dfsynthe_control.format(**cards))
 		file.close()
 		os.chdir(path)
-		os.system('source ./dfp00.com')
+		os.system('sh ./dfp00.com')
 		os.chdir(python_path)
 		print(str(float(dft)) + " K done! (" + str(i+1) + "/" + str(len(dfts)) + ")")
 	os.chdir(path)
-	os.system('source ./dfp00_end.com')
+	os.system('sh ./dfp00_end.com')
 	os.chdir(python_path)
 	
 	# Run SEPARATEDF
@@ -341,7 +341,7 @@ def dfsynthe(run):
 		file.write(templates.separatedf_control_end.format(**cards))
 		file.close()
 		os.chdir(path)
-		os.system('source ./separatedf.com')
+		os.system('sh ./separatedf.com')
 		os.chdir(python_path)
 		if (not (os.path.isfile(path + '/p00big' + v + '.bdf'))) or (not (os.path.isfile(path + '/p00lit' + v + '.bdf'))):
 			print("SEPARATEDF did not output expected files")
@@ -383,7 +383,7 @@ def kapparos(run):
 		file.write(templates.kappa9_control.format(**cards))
 		file.close()
 		os.chdir(path)
-		os.system('source ./kappa9v' + v + '.com')
+		os.system('sh ./kappa9v' + v + '.com')
 		os.chdir(python_path)
 		print(v + " km/s done! (" + str(i+1) + "/" + str(len(vs)) + ")")
 	
@@ -392,7 +392,7 @@ def kapparos(run):
 	file.write(templates.kapreadts_control.format(**cards))
 	file.close()
 	os.chdir(path)
-	os.system('source ./kapreadts.com')
+	os.system('sh ./kapreadts.com')
 	os.chdir(python_path)
 	print("Merged all velocities in a single table. Final output saved in kappa.ros")
 
@@ -436,7 +436,7 @@ def synthe(run, min_wl, max_wl):
 	
 	# Run SYNTHE
 	os.chdir(path)
-	os.system('source ./synthe_launch.com')
+	os.system('sh ./synthe_launch.com')
 	os.chdir(python_path)
 	if not (os.path.isfile(path + '/f7000-7210vr2br48000ap04t4970g46k1at12.asc')):
 		print("SYNTHE did not output expected files")
@@ -582,7 +582,7 @@ def atlas(run, initial_model, iterations, vturb = '2', teff = "0", gravity = "0"
 	# Run ATLAS
 	last_line = '[ ]+72[- ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+[^\n ]+[ ]+([^\n ]+[ ]+.+|[0-9-]+\.[0-9-]+\.[0-9-]+)' # This regex should match the final line in the output of a successful ATLAS-9 run (72nd layer)
 	os.chdir(path)
-	os.system('source ./atlas_control_start.com')
+	os.system('sh ./atlas_control_start.com')
 	
 	# We will allow 20 minutes of processing for every 15 iterations before automatic timeout.
 	# This should be more than enough.
@@ -637,7 +637,7 @@ def atlas(run, initial_model, iterations, vturb = '2', teff = "0", gravity = "0"
 	process.expect(pexpect.EOF)
 	print("ATLAS-9 halted")
 	
-	os.system('source ./atlas_control_end.com')
+	os.system('sh ./atlas_control_end.com')
 	os.chdir(python_path)
 	if not (os.path.isfile(cards['output_1']) and os.path.isfile(cards['output_2'])):
 		print("ATLAS-9 did not output expected files")
