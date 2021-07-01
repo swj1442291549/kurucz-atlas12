@@ -22,7 +22,7 @@ s_data         = './atmos_files_jon/Lines_SYNTHE'
 d_data         = './dfsynthe_files'
 s_molecules    = './atmos_files_jon/Molecules_SYNTHE'
 atlas_init     = './initial_models/*.*'                         # ATLAS-9 initial models directory
-atlas_exe      = '../compiled/atlas9mem.exe'                     # ATLAS-9 compiled executable
+atlas_exe      = '../compiled/atlas9mem'                     # ATLAS-9 compiled executable
 synthe_suite   = '../compiled'                                   # SYNTHE compiled executables
 dfsynthe_suite = '../compiled'                                   # DFSYNTHE compiled executables
 default_vega   = '../std_spectra/vega_bohlin_2004.dat'           # Default Vega spectrum to use for bolometric corrections
@@ -680,26 +680,18 @@ def test_setup():
 	# SYNTHE files
 	files[2] = np.core.defchararray.add(s_data + '/', ['continua.dat', 'fchighlines.bin', 'fclowlines.bin', 'he1tables.dat', 'molecules.dat'])
 	# DFSYNTHE files
-	files[3] = np.core.defchararray.add(d_data + '/', ['continua.dat', 'molecules.dat', 'pfiron.dat', 'repacked_lines/diatomicsdf.bin',
-	                                                   'repacked_lines/h2olinesdf.bin', 'repacked_lines/highlinesdf.bin',
-													   'repacked_lines/lowlinesdf.bin', 'repacked_lines/nltelinesdf.bin', 'repacked_lines/tiolinesdf.bin'])
+	files[3] = np.core.defchararray.add(d_data + '/', ['continua.dat', 'molecules.dat', 'pfiron.dat', 'repacked_lines/diatomicsdf.bin', 'repacked_lines/h2olinesdf.bin', 'repacked_lines/highlinesdf.bin', 'repacked_lines/lowlinesdf.bin', 'repacked_lines/nltelinesdf.bin', 'repacked_lines/tiolinesdf.bin'])
 	# SYNTHE molecules
-	files[4] = np.core.defchararray.add(s_molecules + '/', ['c2ax.asc', 'c2ba.asc', 'c2ba.dat', 'c2da.dat', 'c2dabrookek.asc', 'c2ea.asc',
-	                                                        'c2ea.dat', 'chbx.dat', 'chcx.dat', 'chmasseron.asc', 'cnax.dat', 'cnaxbrookek.asc',
-															'cnbx.dat', 'cnbxbrookek.asc', 'cnxx12brooke.asc', 'coax.asc', 'coax.dat', 'coxx.asc',
-															'eschwenke.bin', 'h2.asc', 'h2bx.dat', 'h2ofastfix.bin', 'h2xx.asc', 'hdxx.asc',
-															'mgh.asc', 'mghbx.dat', 'nh.asc', 'nhax.dat', 'nhca.dat', 'ohupdate.asc', 'sihax.asc',
-															'sihax.dat', 'sioax.asc', 'sioex.asc', 'sioxx.asc', 'tioschwenke.bin', 'vo.asc',
-															'vo.readme', 'vomyt.asc'])
+	files[4] = np.core.defchararray.add(s_molecules + '/', ['c2ax.asc', 'c2ba.asc', 'c2ba.dat', 'c2da.dat', 'c2dabrookek.asc', 'c2ea.asc', 'c2ea.dat', 'chbx.dat', 'chcx.dat', 'chmasseron.asc', 'cnax.dat', 'cnaxbrookek.asc', 'cnbx.dat', 'cnbxbrookek.asc', 'cnxx12brooke.asc', 'coax.asc', 'coax.dat', 'coxx.asc', 'eschwenke.bin', 'h2.asc', 'h2bx.dat', 'h2ofastfix.bin', 'h2xx.asc', 'hdxx.asc', 'mgh.asc', 'mghbx.dat', 'nh.asc', 'nhax.dat', 'nhca.dat', 'ohupdate.asc', 'sihax.asc', 'sihax.dat', 'sioax.asc', 'sioex.asc', 'sioxx.asc', 'tioschwenke.bin', 'vo.asc', 'vo.readme', 'vomyt.asc'])
 	# Executables
 	files[5] = [atlas_exe]
-	files[6] = np.core.defchararray.add(synthe_suite + '/', ['broaden.exe', 'converfsynnmtoa.exe',
-	                                                        'fluxaverage1a_nmtoa.exe',
-															'rgfalllinesnew.exe', 'rh2ofast.exe', 'rmolecasc.exe', 'rotate.exe', 'rpredict.exe',
-															'rschwenk.exe', 'spectrv.exe', 'synbeg.exe', 'synthe.exe',
-															'xnfpelsyn.exe'])
-	files[7] = np.core.defchararray.add(dfsynthe_suite + '/', ['dfsortp.exe', 'dfsynthe.exe', 'kappa9.exe', 'kapreadts.exe',
-															   'separatedf.exe', 'xnfdf.exe'])
+	files[6] = np.core.defchararray.add(synthe_suite + '/', ['broaden', 'converfsynnmtoa',
+	                                                        'fluxaverage1a_nmtoa',
+															'rgfalllinesnew', 'rh2ofast', 'rmolecasc', 'rotate', 'rpredict',
+															'rschwenk', 'spectrv', 'synbeg', 'synthe',
+															'xnfpelsyn'])
+	files[7] = np.core.defchararray.add(dfsynthe_suite + '/', ['dfsortp', 'dfsynthe', 'kappa9', 'kapreadts',
+															   'separatedf', 'xnfdf'])
 	# Default Vega spectrum
 	files[8] = [default_vega]
 	
