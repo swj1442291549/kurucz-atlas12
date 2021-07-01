@@ -1,6 +1,7 @@
 FC = gfortran
 FCFLAGS = -fno-automatic -w -O3
 FC1 = ifort
+FC1FLAGS = -save
 BINDIR = bin
 SRCDIR = src
 
@@ -96,7 +97,7 @@ $(BINDIR)/nltelinesasctobin:
 	$(FC) $(FCFLAGS) -o $@ $(SRCDIR)/nltelinesasctobin.for
 
 $(BINDIR)/kappa9:
-	$(FC1) -o $@ $(SRCDIR)/kappa9.for
+	$(FC1) $(FC1FLAGS) -o $@ $(SRCDIR)/kappa9.for
 
 $(BINDIR)/kapreadts:
-	$(FC1) -o $@ $(SRCDIR)/kapreadts.for
+	$(FC1) $(FC1FLAGS) -o $@ $(SRCDIR)/kapreadts.for
