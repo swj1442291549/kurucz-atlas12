@@ -15,16 +15,16 @@ import settings
 import wavelength
 
 ####     DATA FILES    (absolute or relative to the pipeline)   ####
-kapp00         = './atmos_files_jon/Lines_AT9/kapp00.ros'
-p00big2        = './atmos_files_jon/Lines_AT9/p00big2.bdf'
-molecules      = './atmos_files_jon/Lines_AT9/molecules.dat'
-s_data         = './atmos_files_jon/Lines_SYNTHE'
-d_data         = './dfsynthe_files'
-s_molecules    = './atmos_files_jon/Molecules_SYNTHE'
+kapp00         = './data/atmos_files_jon/Lines_AT9/kapp00.ros'
+p00big2        = './data/atmos_files_jon/Lines_AT9/p00big2.bdf'
+molecules      = './data/atmos_files_jon/Lines_AT9/molecules.dat'
+s_data         = './data/atmos_files_jon/Lines_SYNTHE'
+d_data         = './data/dfsynthe_files'
+s_molecules    = './data/atmos_files_jon/Molecules_SYNTHE'
 atlas_init     = './initial_models/*.*'                         # ATLAS-9 initial models directory
-atlas_exe      = '../compiled/atlas9mem'                     # ATLAS-9 compiled executable
-synthe_suite   = '../compiled'                                   # SYNTHE compiled executables
-dfsynthe_suite = '../compiled'                                   # DFSYNTHE compiled executables
+atlas_exe      = './bin/atlas9mem'                     # ATLAS-9 compiled executable
+synthe_suite   = './bin'                                   # SYNTHE compiled executables
+dfsynthe_suite = './bin'                                   # DFSYNTHE compiled executables
 default_vega   = '../std_spectra/vega_bohlin_2004.dat'           # Default Vega spectrum to use for bolometric corrections
 trans_dir      = '../filters/*.*'                                # Directory for filter transmission profiles for bolometry
 
