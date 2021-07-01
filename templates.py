@@ -46,7 +46,7 @@ ABUNDANCE SCALE   {abundance_scale} ABUNDANCE CHANGE 1 {element_1} 2 {element_2}
 kappa9_control = """
 mv {d_data}/molecules.dat fort.2
 mv ./p00big{v}.bdf fort.9
-{dfsynthe_suite}/kappa9.exe<<EOF>kapm40k2.out
+{dfsynthe_suite}/kappa9<<EOF>kapm40k2.out
 MOLECULES ON
 READ MOLECULES
 FREQUENCIES 337 1 337 BIG
@@ -162,7 +162,7 @@ mv kapk1.dat fort.12
 mv kapk2.dat fort.13
 mv kapk4.dat fort.14
 mv kapk8.dat fort.15
-{dfsynthe_suite}/kapreadts.exe
+{dfsynthe_suite}/kapreadts
 mv fort.2 kappa.ros
 rm fort.*
 """
@@ -170,7 +170,7 @@ rm fort.*
 xnfdf_control_start = """cp {d_data}/molecules.dat fort.2
 cp {d_data}/pfiron.dat fort.4
 cp {d_data}/continua.dat fort.17
-{dfsynthe_suite}/xnfdf.exe<<EOF>xnfdf.out
+{dfsynthe_suite}/xnfdf<<EOF>xnfdf.out
 READ MOLECULES
 MOLECULES ON
 ITERATIONS 1 PRINT 0 PUNCH 0
@@ -260,7 +260,7 @@ mv fort.51 {d_data}/repacked_lines/nltelinesdf.bin
 """
 
 dfsynthe_control = """
-{dfsynthe_suite}/dfsynthe.exe<<EOF>dfp00t{dft}.out 
+{dfsynthe_suite}/dfsynthe<<EOF>dfp00t{dft}.out 
 {dfsynthe_control_cards}
 EOF
 mv fort.15 dfp00t{dft}vt0.bin
@@ -270,27 +270,27 @@ mv fort.18 dfp00t{dft}vt4.bin
 mv fort.20 dfp00t{dft}vt8.bin
 
 mv dfp00t{dft}vt0.bin fort.1
-{dfsynthe_suite}/dfsortp.exe>dfsortp.out
+{dfsynthe_suite}/dfsortp>dfsortp.out
 mv fort.2 dfp00t{dft}vt0sortp.asc
 mv fort.1 dfp00t{dft}vt0.bin
 
 mv dfp00t{dft}vt1.bin fort.1
-{dfsynthe_suite}/dfsortp.exe>dfsortp.out
+{dfsynthe_suite}/dfsortp>dfsortp.out
 mv fort.2 dfp00t{dft}vt1sortp.asc
 mv fort.1 dfp00t{dft}vt1.bin
 
 mv dfp00t{dft}vt2.bin fort.1
-{dfsynthe_suite}/dfsortp.exe>dfsortp.out
+{dfsynthe_suite}/dfsortp>dfsortp.out
 mv fort.2 dfp00t{dft}vt2sortp.asc
 mv fort.1 dfp00t{dft}vt2.bin
 
 mv dfp00t{dft}vt4.bin fort.1
-{dfsynthe_suite}/dfsortp.exe>dfsortp.out
+{dfsynthe_suite}/dfsortp>dfsortp.out
 mv fort.2 dfp00t{dft}vt4sortp.asc
 mv fort.1 dfp00t{dft}vt4.bin
 
 mv dfp00t{dft}vt8.bin fort.1
-{dfsynthe_suite}/dfsortp.exe>dfsortp.out
+{dfsynthe_suite}/dfsortp>dfsortp.out
 mv fort.2 dfp00t{dft}vt8sortp.asc
 mv fort.1 dfp00t{dft}vt8.bin
 """
@@ -298,7 +298,7 @@ mv fort.1 dfp00t{dft}vt8.bin
 separatedf_control = """mv dfp00t{dft}vt{v}sortp.asc fort.{serial}
 """
 
-separatedf_control_end = """{dfsynthe_suite}/separatedf.exe
+separatedf_control_end = """{dfsynthe_suite}/separatedf
 mv fort.2 p00big{v}.bdf
 mv fort.3 p00lit{v}.bdf
 rm fort.*
@@ -325,162 +325,162 @@ ln -s {s_data}/molecules.dat fort.2
 ln -s {s_data}/continua.dat fort.17
 
 # synthe_solar contains the ATLAS-9 output near-solar model with a few additional commands prepended
-# First, run xnfpelsyn.exe which takes the model and atomic and molecular densities (whatever that means)
-{synthe_suite}/xnfpelsyn.exe< {synthe_solar}>xnfpelsyn.out
+# First, run xnfpelsyn which takes the model and atomic and molecular densities (whatever that means)
+{synthe_suite}/xnfpelsyn< {synthe_solar}>xnfpelsyn.out
 mv fort.10 xnft4950g46k1at12.dat
 rm fort.*
 
-# synberg.exe initializes the computation. It feeds on the computation parameters such as the wavelength range
+# synberg initializes the computation. It feeds on the computation parameters such as the wavelength range
 # (WLBEG to WLEND), resolution and more...
-{synthe_suite}/synbeg.exe<<"EOF">synbeg.out
+{synthe_suite}/synbeg<<"EOF">synbeg.out
 AIR       {min_wl}{max_wl}600000.     0.00    0     30    .0001     1    0
 AIRorVAC  WLBEG     WLEND     RESOLU    TURBV  IFNLTE LINOUT CUTOFF        NREAD
 EOF
 
 # Below we import all the spectral lines that we want. Ultimately, it is just a tonne of files with line parameters
-# each subsequently fed into rgfalllinesnew.exe for atoms and rmolecasc.exe for molecules
+# each subsequently fed into rgfalllinesnew for atoms and rmolecasc for molecules
 ln -s {s_data}/gf0800.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0800.out
+{synthe_suite}/rgfalllinesnew>gf0800.out
 rm fort.11
 ln -s {s_data}/gf1200.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf1200.out
+{synthe_suite}/rgfalllinesnew>gf1200.out
 rm fort.11
 ln -s {s_data}/gf0200.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0200.out
+{synthe_suite}/rgfalllinesnew>gf0200.out
 rm fort.11
 ln -s {s_data}/gf0300.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0300.out
+{synthe_suite}/rgfalllinesnew>gf0300.out
 rm fort.11
 ln -s {s_data}/gf0400.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0400.out
+{synthe_suite}/rgfalllinesnew>gf0400.out
 rm fort.11
 ln -s {s_data}/gf0500.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0500.out
+{synthe_suite}/rgfalllinesnew>gf0500.out
 rm fort.11
 ln -s {s_data}/gf0600.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf0600.out
+{synthe_suite}/rgfalllinesnew>gf0600.out
 rm fort.11
 ln -s {s_data}/gf3000.100 fort.11
-{synthe_suite}/rgfalllinesnew.exe>gf3000.out
+{synthe_suite}/rgfalllinesnew>gf3000.out
 rm fort.11
 ln -s  {s_molecules}/chmasseron.asc fort.11
-{synthe_suite}/rmolecasc.exe>chmasseron.out
+{synthe_suite}/rmolecasc>chmasseron.out
 rm fort.11
 ln -s {s_molecules}/mgh.asc fort.11
-{synthe_suite}/rmolecasc.exe>mgh.out
+{synthe_suite}/rmolecasc>mgh.out
 rm fort.11
 ln -s {s_molecules}/nh.asc fort.11
-{synthe_suite}/rmolecasc.exe>nh.out
+{synthe_suite}/rmolecasc>nh.out
 rm fort.11
 ln -s  {s_molecules}/ohupdate.asc fort.11
-{synthe_suite}/rmolecasc.exe>oh.out
+{synthe_suite}/rmolecasc>oh.out
 rm fort.11
 ln -s  {s_molecules}/sihax.asc fort.11
-{synthe_suite}/rmolecasc.exe>sihax.out
+{synthe_suite}/rmolecasc>sihax.out
 rm fort.11
 ln -s {s_molecules}/h2.asc fort.11
-{synthe_suite}/rmolecasc.exe>h2.out
+{synthe_suite}/rmolecasc>h2.out
 rm fort.11
 ln -s {s_molecules}/h2xx.asc fort.11
-{synthe_suite}/rmolecasc.exe>h2xx.out
+{synthe_suite}/rmolecasc>h2xx.out
 rm fort.11
 ln -s {s_molecules}/hdxx.asc fort.11
-{synthe_suite}/rmolecasc.exe>hdxx.out
+{synthe_suite}/rmolecasc>hdxx.out
 rm fort.11
 ln -s {s_molecules}/c2ax.asc fort.11
-{synthe_suite}/rmolecasc.exe>c2ax.out
+{synthe_suite}/rmolecasc>c2ax.out
 rm fort.11
 ln -s {s_molecules}/c2ba.asc fort.11
-{synthe_suite}/rmolecasc.exe>c2ba.out
+{synthe_suite}/rmolecasc>c2ba.out
 rm fort.11
 ln -s {s_molecules}/c2dabrookek.asc fort.11
-{synthe_suite}/rmolecasc.exe>c2da.out
+{synthe_suite}/rmolecasc>c2da.out
 rm fort.11
 ln -s  {s_molecules}/c2ea.asc fort.11
-{synthe_suite}/rmolecasc.exe>c2ea.out
+{synthe_suite}/rmolecasc>c2ea.out
 rm fort.11
 ln -s {s_molecules}/cnaxbrookek.asc fort.11
-{synthe_suite}/rmolecasc.exe>cnax.out
+{synthe_suite}/rmolecasc>cnax.out
 rm fort.11
 ln -s {s_molecules}/cnbxbrookek.asc fort.11
-{synthe_suite}/rmolecasc.exe>cnbx.out
+{synthe_suite}/rmolecasc>cnbx.out
 rm fort.11
 ln -s {s_molecules}/cnxx12brooke.asc fort.11
-{synthe_suite}/rmolecasc.exe>cnxx12.out
+{synthe_suite}/rmolecasc>cnxx12.out
 rm fort.11
 ln -s {s_molecules}/coax.asc fort.11
-{synthe_suite}/rmolecasc.exe>coax.out
+{synthe_suite}/rmolecasc>coax.out
 rm fort.11
 ln -s {s_molecules}/coxx.asc fort.11
-{synthe_suite}/rmolecasc.exe>coxx.out
+{synthe_suite}/rmolecasc>coxx.out
 rm fort.11
 ln -s {s_molecules}/sioax.asc fort.11
-{synthe_suite}/rmolecasc.exe>sioax.out
+{synthe_suite}/rmolecasc>sioax.out
 rm fort.11
 ln -s {s_molecules}/sioex.asc fort.11
-{synthe_suite}/rmolecasc.exe>sioex.out
+{synthe_suite}/rmolecasc>sioex.out
 rm fort.11
 ln -s {s_molecules}/sioxx.asc fort.11
-{synthe_suite}/rmolecasc.exe>sioxx.out
+{synthe_suite}/rmolecasc>sioxx.out
 rm fort.11
 
 # weird stuff: to be figured out...
 ln -s {s_data}/fclowlines.bin fort.11
-{synthe_suite}/rpredict.exe>predictedlow.out
+{synthe_suite}/rpredict>predictedlow.out
 rm fort.11
 ln -s {s_data}/fchighlines.bin fort.11
-{synthe_suite}/rpredict.exe>predicthigh.out
+{synthe_suite}/rpredict>predicthigh.out
 rm fort.11
 
 
-# rschwenk.exe adds Titanium Oxide to the model (TiO) and requires two input databases
+# rschwenk adds Titanium Oxide to the model (TiO) and requires two input databases
 ln -s {s_molecules}/tioschwenke.bin fort.11
 ln -s {s_molecules}/eschwenke.bin fort.48
-{synthe_suite}/rschwenk.exe>rschwenk.out
+{synthe_suite}/rschwenk>rschwenk.out
 rm fort.11
 rm fort.48
 
-# rh2ofast.exe does the same for water
+# rh2ofast does the same for water
 ln -s {s_molecules}/h2ofastfix.bin fort.11
-{synthe_suite}/rh2ofast.exe>h2ofastfix.out
+{synthe_suite}/rh2ofast>h2ofastfix.out
 rm fort.11
 
-# synthe.exe requires the previously calculated atomic and molecular densities (by xnfpelsyn.exe) and computes line opacities
+# synthe requires the previously calculated atomic and molecular densities (by xnfpelsyn) and computes line opacities
 ln xnft4950g46k1at12.dat fort.10
 ln -s {s_data}/he1tables.dat fort.18
-{synthe_suite}/synthe.exe>synthe.out
+{synthe_suite}/synthe>synthe.out
 
-# spectrv.exe computes the synthetic spectrum. I don't know what these parameters mean just yet.
+# spectrv computes the synthetic spectrum. I don't know what these parameters mean just yet.
 ln -s {s_data}/molecules.dat fort.2
 cat <<"EOF" >fort.25
 0.0       0.        1.        0.        0.        0.        0.        0.
 0.
 RHOXJ     R1        R101      PH1       PC1       PSI1      PRDDOP    PRDPOW
 EOF
-{synthe_suite}/spectrv.exe<"{synthe_solar}">spectrv.out
+{synthe_suite}/spectrv<"{synthe_solar}">spectrv.out
 
 # Below we are supposed to be rotating and broadening the spectrum. This does not work and gives NaNs all over the resulting spectrum
 # leaving it commented out for now.
 # 
 # mv fort.7 i7000-7210.dat
 # ln -s i7000-7210.dat fort.1
-# {synthe_suite}/rotate.exe<<"EOF">rotate.out
+# {synthe_suite}/rotate<<"EOF">rotate.out
 #     1
 # 0.
 # EOF
 # mv ROT1 f7000-7210vr2.dat
 # ln -s f7000-7210vr2.dat fort.21
-# {synthe_suite}/broaden.exe<<"EOF">broaden.out
+# {synthe_suite}/broaden<<"EOF">broaden.out
 # GAUSSIAN  48000.    RESOLUTION
 # EOF
 # mv fort.22 f7000-7210vr2br48000ap04t4970g46k1at12.bin
 mv fort.7 f7000-7210vr2br48000ap04t4970g46k1at12.bin
 rm fort.*
 
-# Finally, converfsynnmtoa.exe converts the output spectrum in binary into a text file
+# Finally, converfsynnmtoa converts the output spectrum in binary into a text file
 
 ln -s f7000-7210vr2br48000ap04t4970g46k1at12.bin fort.1
-{synthe_suite}/converfsynnmtoa.exe > converfsynnmtoa.out
+{synthe_suite}/converfsynnmtoa > converfsynnmtoa.out
 mv fort.2 f7000-7210vr2br48000ap04t4970g46k1at12.asc
 
 rm fort.*
