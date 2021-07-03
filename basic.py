@@ -316,40 +316,41 @@ def dfsynthe(run):
 	os.system('sh ./dfp00_start.com')
 	os.chdir(python_path)
 	for i, dft in enumerate(dfts):
-		cards['dft'] = str(int(float(dft)))
-		cards['dfsynthe_control_cards'] = '0' * i + '1' + '0' * (len(dfts) - 1 - i)
-		file = open(path + '/dfp00.com', 'w')
-		file.write(templates.dfsynthe_control.format(**cards))
-		file.close()
-		os.chdir(path)
-		os.system('sh ./dfp00.com')
-		os.chdir(python_path)
-		print(str(float(dft)) + " K done! (" + str(i+1) + "/" + str(len(dfts)) + ")")
-	os.chdir(path)
-	os.system('sh ./dfp00_end.com')
-	os.chdir(python_path)
+                if i == 0:
+                    cards['dft'] = str(int(float(dft)))
+                    cards['dfsynthe_control_cards'] = '0' * i + '1' + '0' * (len(dfts) - 1 - i)
+                    file = open(path + '/dfp00.com', 'w')
+                    file.write(templates.dfsynthe_control.format(**cards))
+                    file.close()
+                    os.chdir(path)
+                    # os.system('sh ./dfp00.com')
+                    os.chdir(python_path)
+                    print(str(float(dft)) + " K done! (" + str(i+1) + "/" + str(len(dfts)) + ")")
+	# os.chdir(path)
+	# os.system('sh ./dfp00_end.com')
+	# os.chdir(python_path)
 	
-	# Run SEPARATEDF
-	print("Will run SEPARATEDF to merge the output in a single file for every standard turbulent velocity (0, 1, 2, 4 and 8 km/s)")
-	for j, v in enumerate(vs):
-		cards['v'] = v
-		file = open(path + '/separatedf.com', 'w')
-		for i, dft in enumerate(dfts):
-			cards['dft'] = str(int(float(dft)))
-			cards['serial'] = str(i + 10)
-			file.write(templates.separatedf_control.format(**cards))
-		file.write(templates.separatedf_control_end.format(**cards))
-		file.close()
-		os.chdir(path)
-		os.system('sh ./separatedf.com')
-		os.chdir(python_path)
-		if (not (os.path.isfile(path + '/p00big' + v + '.bdf'))) or (not (os.path.isfile(path + '/p00lit' + v + '.bdf'))):
-			print("SEPARATEDF did not output expected files")
-			return
-		print(v + " km/s done! (" + str(j+1) + "/" + str(len(vs)) + ")")
-	print("SEPARATEDF halted")
-	print("The ODFs are saved in p00bigV.bdf and p00litV.bdf where V is the turbulent velocity")
-	print("Finished running DFSYNTHE in", datetime.now() - startTime, "s" )
+	# # Run SEPARATEDF
+	# print("Will run SEPARATEDF to merge the output in a single file for every standard turbulent velocity (0, 1, 2, 4 and 8 km/s)")
+	# for j, v in enumerate(vs):
+	# 	cards['v'] = v
+	# 	file = open(path + '/separatedf.com', 'w')
+	# 	for i, dft in enumerate(dfts):
+	# 		cards['dft'] = str(int(float(dft)))
+	# 		cards['serial'] = str(i + 10)
+	# 		file.write(templates.separatedf_control.format(**cards))
+	# 	file.write(templates.separatedf_control_end.format(**cards))
+	# 	file.close()
+	# 	os.chdir(path)
+	# 	os.system('sh ./separatedf.com')
+	# 	os.chdir(python_path)
+	# 	if (not (os.path.isfile(path + '/p00big' + v + '.bdf'))) or (not (os.path.isfile(path + '/p00lit' + v + '.bdf'))):
+	# 		print("SEPARATEDF did not output expected files")
+	# 		return
+	# 	print(v + " km/s done! (" + str(j+1) + "/" + str(len(vs)) + ")")
+	# print("SEPARATEDF halted")
+	# print("The ODFs are saved in p00bigV.bdf and p00litV.bdf where V is the turbulent velocity")
+	# print("Finished running DFSYNTHE in", datetime.now() - startTime, "s" )
 
 def kapparos(run):
 	""" Generate Rosseland mean opacities for the current abundances saved in the settings and save in the run directory """
