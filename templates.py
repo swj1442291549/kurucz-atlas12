@@ -167,9 +167,9 @@ mv fort.2 kappa.ros
 rm fort.*
 """
 
-xnfdf_control_start = """cp {d_data}/molecules.dat fort.2
-cp {d_data}/pfiron.dat fort.4
-cp {d_data}/continua.dat fort.17
+xnfdf_control_start = """ln -s {d_data}/molecules.dat fort.2
+ln -s {d_data}/pfiron.dat fort.4
+ln -s {d_data}/continua.dat fort.17
 {dfsynthe_suite}/xnfdf<<EOF>xnfdf.out
 READ MOLECULES
 MOLECULES ON
@@ -240,23 +240,17 @@ BEGIN
 dfsynthe_control_start = """
 mv ./xnfpdf.dat fort.10
 mv ./xnfpdfmax.dat fort.22
-mv {d_data}/repacked_lines/lowlinesdf.bin fort.11
-mv {d_data}/repacked_lines/highlinesdf.bin fort.21
-mv {d_data}/repacked_lines/diatomicsdf.bin fort.31
-mv {d_data}/repacked_lines/tiolinesdf.bin fort.41
-mv {d_data}/repacked_lines/h2olinesdf.bin fort.43
-mv {d_data}/repacked_lines/nltelinesdf.bin fort.51
+ln -s {d_data}/repacked_lines/lowlinesdf.bin fort.11
+ln -s {d_data}/repacked_lines/highlinesdf.bin fort.21
+ln -s {d_data}/repacked_lines/diatomicsdf.bin fort.31
+ln -s {d_data}/repacked_lines/tiolinesdf.bin fort.41
+ln -s {d_data}/repacked_lines/h2olinesdf.bin fort.43
+ln -s {d_data}/repacked_lines/nltelinesdf.bin fort.51
 """
 
 dfsynthe_control_end = """
 mv fort.10 ./xnfpdf.dat
 mv fort.22 ./xnfpdfmax.dat
-mv fort.11 {d_data}/repacked_lines/lowlinesdf.bin
-mv fort.21 {d_data}/repacked_lines/highlinesdf.bin
-mv fort.31 {d_data}/repacked_lines/diatomicsdf.bin
-mv fort.41 {d_data}/repacked_lines/tiolinesdf.bin
-mv fort.43 {d_data}/repacked_lines/h2olinesdf.bin
-mv fort.51 {d_data}/repacked_lines/nltelinesdf.bin
 """
 
 dfsynthe_control = """
