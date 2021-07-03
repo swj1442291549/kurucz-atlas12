@@ -1,5 +1,5 @@
 FC = gfortran
-FCFLAGS = -fno-automatic -w -O3
+FCFLAGS = -fno-automatic -w -O3 -std=legacy
 FC1 = ifort
 FC1FLAGS = -save
 BINDIR = bin
